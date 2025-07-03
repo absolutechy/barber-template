@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import BarberShopReservation from '../components/BarberShopReservation'
 import scrollToTop from '../helpers/scrollToTop'
-
-function Reservations() {
+const Reservations: React.FC = () => {
   useEffect(() => {
     scrollToTop()
   },[])

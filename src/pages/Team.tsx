@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import scrollToTop from '../helpers/scrollToTop'
+//Avoids accidental hoisting surprises. arrow+const 
+//Encourages defining functions before use.
 
-function Team() {
+
+const Team: React.FC = () => { 
    useEffect(() => {
       scrollToTop()
     },[])
+    //why used in this team function? runs once when the component mounts keeps the position to the top good UX 
   return (
     <div className='min-h-screen'>
         <div className='relative'>

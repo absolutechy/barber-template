@@ -1,25 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,ChangeEvent, FormEvent } from 'react'
 import scrollToTop from '../helpers/scrollToTop';
+interface FormData{
+  name:string;
+  email:string;
+  phone:string;
+  message:string;
+}
 
-function Contact() {
+const Contact: React.FC = () => {
   useEffect(() => {
     scrollToTop()
   },[])
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
         phone: '',
         message: '',
       });
 
-      const [message, setMessage] = useState(false)
+      const [message, setMessage] = useState<boolean>(false)
     
-      const handleChange = (e) => {
+      const handleChange = (e : ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
       };
     
-      const handleSubmit = (e) => {
+      const handleSubmit = (e:FormEvent) => {
         e.preventDefault();
         setMessage(true)
       };
@@ -27,7 +33,7 @@ function Contact() {
       return (
         <div className='min-h-screen'>
             <div className='relative'>
-            <img className='brightness-75 grayscale object-cover h-[40vh] object-left-bottom w-full' src='https://lella.qodeinteractive.com/wp-content/uploads/2019/08/title-area-img-1.jpg'></img>
+            <img className='brightness-75 grayscale object-cover h-[40vh] object-left-bottom w-full' src='https://lella.qodeinteractive.com/wp-content/uploads/2019/08/title-area-img-1.jpg' alt="Contact us background"></img>
             <h2 className="absolute h-full top-0 flex items-center left-1/2 -translate-x-1/2 text-center py-4 text-6xl text-red-800">Contact Us</h2>
         </div>
         <div className="max-w-xl mx-auto p-6 text-red-800">
@@ -79,7 +85,7 @@ function Contact() {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                rows="4"
+                rows={4}
                 required
                 className="bg-neutral-300 border-red-800 w-full px-3 py-2 border"
               ></textarea>
@@ -92,7 +98,7 @@ function Contact() {
               Submit
             </button>
             </div>
-            {message ? <p className='text-3xl py-4'>Thanks! we will get in touch with you soon.</p> : null}
+          {message && <p className='text-3xl py-4'>Thanks! we will get in touch with you soon.</p>}
           </form>
         </div>
         </div>
