@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import scrollToTop from '../helpers/scrollToTop'
 
-function About() {
+const About: React.FC = () => {
   useEffect(() => {
     scrollToTop()
   },[])

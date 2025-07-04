@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import scrollToTop from '../helpers/scrollToTop'
 import { Link } from 'react-router-dom'
 
-function NotFound() {
+const NotFound: React.FC = () => {
   useEffect(() => {
     scrollToTop()
   },[])
