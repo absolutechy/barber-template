@@ -1,3 +1,5 @@
+import React from "react";
+
 const BarberServices:React.FC = () => {
     return (
       <section className="max-w-xl">
