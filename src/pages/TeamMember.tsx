@@ -2,10 +2,21 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import scrollToTop from '../helpers/scrollToTop'
 
-function TeamMember() {
-    const params = useParams()
-    const [member, setMember] = useState({})
-    const members = {
+
+interface TeamMemberData {
+  name: string;
+  desc: string;
+  image: string;
+  subheader: string;
+}
+
+const TeamMember: React.FC = () => { 
+    const params = useParams<{ id: string }>();
+   
+    const [member, setMember] = useState<TeamMemberData | null>(null);
+    
+   
+    const members: Record<string, TeamMemberData> = {
         sierra: {
             name: 'Sierra',
             desc: `
@@ -63,22 +74,26 @@ function TeamMember() {
             subheader: 'Expert Stylist'
         }
     }
+
     useEffect(() => {
         scrollToTop()
-        if(params.id === 'sierra') {
-            setMember(members.sierra)
+        if (params.id && members[params.id]) {
+            setMember(members[params.id])
         }
-        if(params.id === 'billy') {
-            setMember(members.billy)
-        }
-        if(params.id === 'jonny') {
-            setMember(members.jonny)
-        }
-      },[])
+    }, [params.id])
+
+    if (!member) {
+        return <div className="min-h-screen flex items-center justify-center">Loading...</div>
+    }
+
     return (
       <div className='min-h-screen'>
           <div className='relative'>
-              <img className='brightness-75 grayscale object-cover h-[40vh] object-left-bottom w-full' src='https://lella.qodeinteractive.com/wp-content/uploads/2019/08/title-area-img-4.jpg'></img>
+              <img 
+                className='brightness-75 grayscale object-cover h-[40vh] object-left-bottom w-full' 
+                src='https://lella.qodeinteractive.com/wp-content/uploads/2019/08/title-area-img-4.jpg'
+                alt="Barbershop background"
+              />
               <h2 className="absolute h-full top-0 flex items-center left-1/2 -translate-x-1/2 text-center py-4 text-6xl text-red-800">Our Team</h2>
           </div>
         <section className="py-20 gap-4 flex justify-center relative text-neutral-950">
@@ -87,7 +102,11 @@ function TeamMember() {
             <p className="italic">{member.subheader}</p>
             <p className="max-w-lg mx-auto text-xl">{member.desc}</p>
           </div>
-          <img src={member.image} className="w-1/4 h-fit grayscale object-cover hidden md:block" ></img>
+          <img 
+            src={member.image} 
+            className="w-1/4 h-fit grayscale object-cover hidden md:block" 
+            alt={`Portrait of ${member.name}`}
+          />
         </section>
       </div>
     )
