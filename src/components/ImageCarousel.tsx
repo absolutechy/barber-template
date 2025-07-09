@@ -1,7 +1,8 @@
 import React from 'react'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-function ImageCarousel(props) {  
+
+const ImageCarousel:React.FC = (props: { deviceType?: string } ) => {  
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -38,10 +39,10 @@ function ImageCarousel(props) {
     dotListClass="custom-dot-list-style"
     itemClass="carousel-item-padding-40-px"
   >
-    <img src='https://images.pexels.com/photos/1319460/pexels-photo-1319460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'></img>
-    <img src='https://images.pexels.com/photos/1319459/pexels-photo-1319459.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'></img>
-    <img src='https://images.pexels.com/photos/1453005/pexels-photo-1453005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'></img>
-    <img src='https://images.pexels.com/photos/4969838/pexels-photo-4969838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'></img>
+    <img src='https://images.pexels.com/photos/1319460/pexels-photo-1319460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' alt='slide1' />
+    <img src='https://images.pexels.com/photos/1319459/pexels-photo-1319459.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' alt='slide2' />
+    <img src='https://images.pexels.com/photos/1453005/pexels-photo-1453005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' alt='slide3' />
+    <img src='https://images.pexels.com/photos/4969838/pexels-photo-4969838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' alt='slide4' />
   </Carousel>
   )
 }

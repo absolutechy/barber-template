@@ -1,4 +1,4 @@
-function BarberServices() {
+const BarberServices:React.FC = () => {
     return (
       <section className="max-w-xl">
         <h2 className="text-center text-3xl py-4 text-red-800">Barber Services</h2>
