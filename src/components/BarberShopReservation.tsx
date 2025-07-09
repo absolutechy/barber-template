@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import ServicesSelect from './ServicesSelect';
 
 // Custom select component
 
+interface CustomSelectProps {
+  options: string[];
+  value: string;
+  onChange: (value: string) => void;
+}
 
 function BarberShopReservation() {
   const [selectedStylist, setSelectedStylist] = useState('Sierra');
-  const [selectedDate, setSelectedDate] = useState('');
-  const [selectedTime, setSelectedTime] = useState('');
-  const [selectedService, setSelectedService] = useState('Signature Cut & Style');
-  const [message, setMessage] = useState('')
-  const [datePicked, setDatePicked] = useState([])
+  const [selectedDate, setSelectedDate] = useState<string>('');
+  const [selectedTime, setSelectedTime] = useState<string>('');
+  const [selectedService, setSelectedService] = useState<string>('Signature Cut & Style');
+  const [message, setMessage] = useState<string>('')
+  const [datePicked, setDatePicked] = useState<number[]>([])
 
   useEffect(() => {
     setDatePicked([])
@@ -21,18 +26,18 @@ function BarberShopReservation() {
     }
   },[selectedDate])
 
-  const handleStylistChange = (stylist) => {
+  const handleStylistChange = (stylist:string) => {
     setSelectedStylist(stylist);
   };
 
-  const handleDateChange = (event) => {
+  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedDate(event.target.value);
   };
 
-  const handleTimeChange = (time) => {
+  const handleTimeChange = (time:string) => {
     setSelectedTime(time);
   };
-  let newdate = null
+  let newdate:string;
   let dateObj = new Date();
   let month = dateObj.getUTCMonth() + 1; //months from 1-12
   let day = dateObj.getUTCDate();
@@ -40,23 +45,23 @@ function BarberShopReservation() {
   newdate = year + "-" + month + "-" + day;
 
   // Generate time slots from 8 AM to 6 PM with 30-minute intervals
-  const timeSlots = [];
+  const timeSlots:string[] = [];
   let currentTime = new Date('2023-01-01T08:00:00');
   const endTime = new Date('2023-01-01T18:00:00');
 
   while (currentTime <= endTime) {
-    const timeString = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const timeString:string = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     timeSlots.push(timeString);
     currentTime.setMinutes(currentTime.getMinutes() + 30);
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event:FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if(selectedDate && selectedService && selectedStylist && selectedTime)
     setMessage(`Successfully Booked Reservation with ${selectedStylist} for ${selectedService} on ${selectedDate} at ${selectedTime}. We will be reaching out to you shortly!`);
     // You can implement your booking logic here
   };
-  function CustomSelect({ options, value, onChange }) {
+  function CustomSelect({ options, value, onChange }: CustomSelectProps) {
     return (
       <div className="w-96 flex flex-wrap gap-2 justify-center text-xl nav">
         {options.map((option, index) => (

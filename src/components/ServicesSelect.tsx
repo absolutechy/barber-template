@@ -1,6 +1,10 @@
 import React from 'react'
 
-function ServicesSelect({setSelectedService}) {
+interface ServicesSelectProps {
+  setSelectedService: (service: string) => void;
+}
+
+function ServicesSelect({setSelectedService}: ServicesSelectProps) {
   return (
     <select defaultValue={'Signature Cut & Style'} className='bg-neutral-300 text-ellipsis w-80 border border-red-800 text-red-800' onChange={(e) => setSelectedService(e.target.value)}>
         <option>Signature Cut & Style</option>
